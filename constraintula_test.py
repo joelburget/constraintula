@@ -25,40 +25,11 @@ import constraintula
 PI = np.pi
 
 
-class Circle:
-    def __init__(self, radius):
-        self.radius = radius
-
-    @property
-    def diameter(self):
-        return self.radius * 2
-
-    @property
-    def circumference(self):
-        return self.radius * 2 * PI
-
-    @property
-    def area(self):
-        return PI * self.radius ** 2
-
-
 @attr.dataclass
 class Foo:
     x: float
     y: float
     z: float
-
-
-def test_constraintula():
-    C = Symbol('C')  # circumference
-    D = Symbol('D')  # diameter
-    R = Symbol('R')  # radius
-    A = Symbol('A')  # area
-
-    system = constraintula.System({D - 2 * R, C - PI * D, A - 2 * PI * R ** 2}).with_independent(C)
-
-    circle = Circle(system.evaluate({C: 10})[R])
-    assert np.abs(circle.radius - 10 / (2 * PI)) < 0.001
 
 
 def test_make_wrapper():
